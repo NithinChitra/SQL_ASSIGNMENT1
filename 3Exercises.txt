@@ -1,0 +1,137 @@
+-- ---------------EXERCISE-1-------------------
+
+create database onlineConsultancy;
+
+-- DOCTOR table
+CREATE TABLE DOCTOR_TAB(ID INT PRIMARY KEY NOT NULL,
+NAME VARCHAR(20) NOT NULL,
+SPECIALIZATION VARCHAR(20) NOT NULL);
+
+--  APPOINTMENT table 
+CREATE TABLE APPOINTMENT_TAB(APPOINTMENT_DATE DATE NOT NULL,
+APPOINTMENT_NUMBER INT NOT NULL);
+
+-- PATIENT TABLE
+CREATE TABLE PATIENT_TAB(PATIENT_NAME VARCHAR(20) NOT NULL,
+PATIENT_AGE INT NOT NULL,
+PATIENT_ADDRESS VARCHAR(30) NOT NULL);
+
+-- REVIEWS TABLE
+CREATE TABLE REVIEWS_TAB(HOSPITAL_RATING INT NOT NULL,
+FACILITIES_RATING INT NOT NULL);
+
+SELECT * FROM DOCTOR_TAB;
+SELECT * FROM APPOINTMENT_TAB;
+SELECT * FROM PATIENT_TAB;
+SELECT * FROM REVIEWS_TAB;
+
+-- ---------------EXERCISE-2-----------------------
+
+CREATE DATABASE CONTACT_DB;
+
+-- CONTACT TABLE
+CREATE TABLE CONTACT_TAB(ID INT PRIMARY KEY NOT NULL,
+Email VARCHAR(20) NOT NULL,
+fname VARCHAR(20) NOT NULL,
+lname VARCHAR(20) NOT NULL,
+company VARCHAR(10) NOT NULL,
+Active_flag INT NOT NULL,
+opt_out INT NOT NULL);
+
+INSERT INTO CONTACT_TAB VALUES(123,"a@a.com","Kian","Seth","ABC",1,1),
+(133,"b@a.com","Neha","Seth","ABC",1,0),
+(234,"c@c.com","Puru","Malik","CDF",0,0),
+(342,"d@d.com","Sid","Maan","TEG",1,0);
+
+SELECT * FROM CONTACT_TAB;
+
+-- 1.SELECT ALL COLUMNS FROM THE CONTACT TABLE WHERE THE ACTIVE FLAG IS 1
+SELECT * FROM CONTACT_TAB WHERE ACTIVE_FLAG=1;
+
+-- 2.DEACTIVATE CONTACTS WHO ARE OPTED OUT
+DELETE FROM CONTACT_TAB WHERE OPT_OUT=1;
+
+-- 3.DELETE ALL THE CONTACTS WHO HAVE THE COMPANY NAME AS 'ABC'
+DELETE FROM CONTACT_TAB WHERE COMPANY="ABC";
+
+-- 4.INSERT A NEW ROW WITH ID AS 658, NAME AS 'mili',email as
+-- 'mili@gmail.com',company as 'DGH',active_flag as 1,opt-out as 1
+INSERT INTO CONTACT_TAB VALUES(658,"mili@gmail.com","mili","mili","DGH",1,1);
+
+-- 5.PULL OUT UNIQUE VALUES OF THE COMPANY COLUMN
+SELECT DISTINCT COMPANY FROM CONTACT_TAB;
+
+-- 6.UPDATE NAME "mili" to "niti"
+UPDATE CONTACT_TAB SET fname="niti",lname="niti" WHERE fname="mili";
+
+-- -----------------------EXERCISE-3---------------------------
+
+CREATE DATABASE EXE3;
+
+-- 	CUTOMER TABLE
+CREATE TABLE CUSTOMER_TAB(customer_id INT PRIMARY KEY NOT NULL,
+cust_name VARCHAR(20) NOT NULL,city VARCHAR(20) NOT NULL,
+grade INT, salesman_id INT NOT NULL);
+
+
+INSERT INTO CUSTOMER_TAB VALUES(3002,"Nick Rimando","New York",100,5001),
+(3007,"Brad Davis","New York",200,5001),
+(3005,"Graham Zusi","California",200,5002),
+(3008,"Julian Green","London",300,5002),
+(3004,"Fabian Johndson","Paris",300,5006),
+(3009,"Geoff Cameron","Berlin",100,5003),
+(3003,"Jozy Altidor","Moscow",200,5007);
+
+INSERT INTO CUSTOMER_TAB(customer_id,cust_name,city,salesman_id)
+VALUES (3001,"Brad Guzan","London",5005);
+
+-- SALESMAN TABLE
+CREATE TABLE SALESMAN_TAB(salesman_id INT PRIMARY KEY NOT NULL,
+name VARCHAR(20) NOT NULL,
+city VARCHAR(20) NOT NULL,
+commission VARCHAR(10) NOT NULL);
+
+INSERT INTO SALESMAN_TAB VALUES(5001,"James Hoog","New York","0.15"),
+(5002,"Nail Knite","Paris","0.13"),
+(5005,"Pit Alex","London","0.11"),
+(5006,"Mc Lyon","Paris","0.14"),
+(5007,"Paul Adam","Rome","0.13"),
+(5003,"Lauson Hen","San Jose","0.12");
+
+SELECT * FROM SALESMAN_TAB;
+SELECT * FROM CUSTOMER_TAB;
+
+-- SQL QUERY TO FIND THOSE CUSTOMERS WITH A GRADE GREATER THAN 100
+-- IT SHOULD RETURN cust_name,customer city,grade,salesman,salesman city
+-- asc by customer_id
+SELECT c.cust_name,c.city,c.grade,s.name,s.city FROM CUSTOMER_TAB c,
+SALESMAN_TAB s WHERE c.grade>100 and c.salesman_id=s.salesman_id;
+-- ABOVE QUESTION IS HAVING MISTAKE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
